@@ -320,6 +320,33 @@ I won't be configuring Gentoo to use binary packages by default.
 */* CPU_FLAGS_X86: aes avx avx2 bmi1 bmi2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 vpclmulqdq
 ```
 
+Configure `VIDEO_CARDS`
+
+```
+(chroot) livecd / # cat /etc/portage/package.use/00video_cards 
+*/* VIDEO_CARDS: amdgpu radeonrsi
+```
+
+I will change `ACCEPT_LICENSE` to accept basically any license:
+
+In `/etc/portage/make.conf` add 
+
+```
+ACCEPT_LICENSE="-* @FREE @BINARY-REDISTRIBUTABLE @EULA"
+```
+
+We can check that the change worked:
+
+```
+(chroot) livecd / # portageq envvar ACCEPT_LICENSE
+@FREE @BINARY-REDISTRIBUTABLE @EULA
+```
+
+Now I will update the world set:
+
+```
+(chroot) livecd / # emerge --ask --verbose --update --deep --changed-use @world
+```
 
 
 
