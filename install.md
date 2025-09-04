@@ -280,9 +280,45 @@ livecd / # export PS1="(chroot) ${PS1}"
 (chroot) livecd / # 
 ```
 
+## Configuring portage
 
+```
+(chroot) livecd / # emerge-webrsync 
+```
 
+```
+(chroot) livecd / # emerge --ask --verbose --oneshot app-portage/mirrorselect
+```
 
+```
+(chroot) livecd / # mirrorselect -i -o >> /etc/portage/make.conf 
+```
+
+I am already using the profile I want, so I won't switch.
+
+Configure a binary package host:
+
+`/etc/portage/binrepos.conf/gentoobinhost.conf`
+```
+# These settings were set by the catalyst build script that automatically
+# built this stage.
+# Please consider using a local mirror.
+
+[gentoobinhost]
+priority = 1
+sync-uri = http://gentoo-mirror.flux.utah.edu/releases/amd64/binpackages/23.0/x86-64-v3/
+```
+
+I won't be configuring Gentoo to use binary packages by default.
+
+```
+(chroot) livecd / # emerge --ask --oneshot app-portage/cpuid2cpuflags
+```
+
+```
+(chroot) livecd / # cat /etc/portage/package.use/00cpu-flags 
+*/* CPU_FLAGS_X86: aes avx avx2 bmi1 bmi2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 vpclmulqdq
+```
 
 
 
