@@ -354,7 +354,7 @@ Set the timezone
 (chroot) livecd / # ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime 
 ```
 
-Set the locale
+Generate the locale
 
 ```
 (chroot) livecd / # cat /etc/locale.gen 
@@ -406,4 +406,54 @@ en_US.UTF-8 UTF-8
  * Adding locales to archive ...                                                  [ ok ]
 ```
 
+Set the locale
 
+```
+(chroot) livecd / # eselect locale list
+Available targets for the LANG variable:
+  [1]   C
+  [2]   C.utf8
+  [3]   POSIX
+  [4]   en_US
+  [5]   en_US.iso88591
+  [6]   en_US.utf8
+  [7]   C.UTF8 *
+  [ ]   (free form)
+```
+
+```
+(chroot) livecd / # eselect locale set 2
+Setting LANG to C.utf8 ...
+Run ". /etc/profile" to update the variable in your shell.
+```
+
+```
+(chroot) livecd / # env-update && source /etc/profile && export PS1="(chroot) ${PS1}"
+>>> Regenerating /etc/ld.so.cache...
+```
+
+## Configuring the Kernel
+
+```
+(chroot) livecd / # emerge --ask sys-kernel/linux-firmware
+```
+
+I will be using EFI stub booting instead of GRUB
+
+In `/etc/portage/package.accept_keywords/installkernel`
+```
+sys-kernel/installkernel
+sys-boot/uefi-mkconfig
+app-emulation/virt-firmware
+```
+
+In `/etc/portage/package.use/installkernel`
+```
+sys-kernel/installkernel efistub
+```
+
+```
+(chroot) livecd / # emerge --ask sys-kernel/installkernel
+```
+
+```
