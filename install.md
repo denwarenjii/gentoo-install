@@ -456,4 +456,12 @@ sys-kernel/installkernel efistub
 (chroot) livecd / # emerge --ask sys-kernel/installkernel
 ```
 
+Add the `dracut` USE flag to `installkernel`.
+
+In `/etc/portage/package.use/installkernel`
 ```
+sys-kernel/installkernel efistub dracut
+```
+
+I will not be using a UKI (Unified Kernel Image).
+
