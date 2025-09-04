@@ -196,3 +196,97 @@ livecd /home/gentoo # mount /dev/nvme0n1p1 /mnt/gentoo/efi/
 
 # Installing a stage file
 
+```
+livecd /home/gentoo # cd /mnt/gentoo/
+livecd /mnt/gentoo # date
+Wed Sep  3 20:27:28 UTC 2025
+livecd /mnt/gentoo # chronyd -q
+2025-09-03T20:27:35Z chronyd version 4.7 starting (+CMDMON +REFCLOCK +RTC +PRIVDROP +SCFILTER -SIGND +NTS +SECHASH +IPV6 -DEBUG)
+2025-09-03T20:27:35Z Wrong owner of /run/chrony (UID != 0)
+2025-09-03T20:27:35Z Disabled command socket /run/chrony/chronyd.sock
+2025-09-03T20:27:35Z Running with root privileges
+2025-09-03T20:27:40Z System clock wrong by 25196.524922 seconds (step)
+2025-09-04T03:27:37Z chronyd exiting
+```
+
+I downloaded the following stage3 file:
+
+https://distfiles.gentoo.org/releases/amd64/autobuilds/20250831T170358Z/stage3-amd64-desktop-openrc-20250831T170358Z.tar.xz
+
+```
+livecd /mnt/gentoo # tar xpvf stage3-amd64-desktop-openrc-20250831T170358Z.tar.xz --xattrs-include='*.*' --numeric-owner -C /mnt/gentoo/
+```
+
+## Configuring compile flags
+
+```
+livecd /mnt/gentoo # vim /mnt/gentoo/etc/portage/make.conf 
+```
+
+Add `-march=native` to `COMMON_FLAGS` and add a `RUST_FLAGS` option. Also add `MAKEOPTS`
+```
+livecd /mnt/gentoo # cat /mnt/gentoo/etc/portage/make.conf 
+# These settings were set by the catalyst build script that automatically
+# built this stage.
+# Please consult /usr/share/portage/config/make.conf.example for a more
+# detailed example.
+COMMON_FLAGS="-march=native -O2 -pipe"
+CFLAGS="${COMMON_FLAGS}"
+CXXFLAGS="${COMMON_FLAGS}"
+FCFLAGS="${COMMON_FLAGS}"
+FFLAGS="${COMMON_FLAGS}"
+
+RUSTFLAGS="${RUSTFLAGS} -C target-cpu=native"
+
+MAKEOPTS="-j8 -l9"
+
+# NOTE: This stage was built with the bindist USE flag enabled
+
+# This sets the language of build output to English.
+# Please keep this setting intact when reporting bugs.
+LC_MESSAGES=C.utf8
+```
+
+## Installing the base system
+
+```
+livecd /mnt/gentoo # cp --dereference /etc/resolv.conf /mnt/gentoo/etc/
+```
+
+Chroot into the new location:
+
+```
+livecd /mnt/gentoo # arch-chroot /mnt/gentoo/
+livecd / # lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0         7:0    0   3.6G  1 loop 
+sda           8:0    1  57.7G  0 disk 
+└─sda1        8:1    1  57.7G  0 part 
+nvme0n1     259:0    0 476.9G  0 disk 
+├─nvme0n1p1 259:1    0   499M  0 part /efi
+├─nvme0n1p2 259:2    0   128M  0 part 
+├─nvme0n1p3 259:3    0 100.5G  0 part 
+├─nvme0n1p4 259:4    0   4.8G  0 part 
+├─nvme0n1p5 259:5    0    16G  0 part [SWAP]
+└─nvme0n1p6 259:6    0 355.1G  0 part /
+
+```
+
+Thus, we see that we are now in your new root partition.
+
+```
+livecd / # source /etc/profile
+livecd / # export PS1="(chroot) ${PS1}"
+(chroot) livecd / # 
+```
+
+
+
+
+
+
+
+
+
+
+
