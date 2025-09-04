@@ -348,8 +348,62 @@ Now I will update the world set:
 (chroot) livecd / # emerge --ask --verbose --update --deep --changed-use @world
 ```
 
+Set the timezone
 
+```
+(chroot) livecd / # ln -sf /usr/share/zoneinfo/US/Pacific /etc/localtime 
+```
 
+Set the locale
 
+```
+(chroot) livecd / # cat /etc/locale.gen 
+# /etc/locale.gen: list all of the locales you want to have on your system.
+# See the locale.gen(5) man page for more details.
+#
+# The format of each line:
+# <locale name> <charset>
+#
+# Where <locale name> starts with a name as found in /usr/share/i18n/locales/.
+# It must be unique in the file as it is used as the key to locale variables.
+# For non-default encodings, the <charset> is typically appended.
+#
+# Where <charset> is a charset located in /usr/share/i18n/charmaps/ (sans any
+# suffix like ".gz").
+#
+# All blank lines and lines starting with # are ignored.
+#
+# For the default list of supported combinations, see the file:
+# /usr/share/i18n/SUPPORTED
+#
+# Whenever glibc is emerged, the locales listed here will be automatically
+# rebuilt for you.  After updating this file, you can simply run `locale-gen`
+# yourself instead of re-emerging glibc.
+
+en_US ISO-8859-1
+en_US.UTF-8 UTF-8
+#ja_JP.EUC-JP EUC-JP
+#ja_JP.UTF-8 UTF-8
+#ja_JP EUC-JP
+#en_HK ISO-8859-1
+#en_PH ISO-8859-1
+#de_DE ISO-8859-1
+#de_DE@euro ISO-8859-15
+#es_MX ISO-8859-1
+#fa_IR UTF-8
+#fr_FR ISO-8859-1
+#fr_FR@euro ISO-8859-15
+#it_IT ISO-8859-1
+```
+
+```
+(chroot) livecd / # locale-gen 
+ * Generating 3 locales (this might take a while) with 16 jobs
+ *  (1/3) Generating en_US.ISO-8859-1 ...                                         [ ok ]
+ *  (3/3) Generating C.UTF-8 ...                                                  [ ok ]
+ *  (2/3) Generating en_US.UTF-8 ...                                              [ ok ]
+ * Generation complete
+ * Adding locales to archive ...                                                  [ ok ]
+```
 
 
