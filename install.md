@@ -136,53 +136,19 @@ livecd /home/gentoo # cryptsetup -v luksFormat /dev/nvme0n1p6
 ```
 livecd /home/gentoo # mkfs.btrfs -L rootfs /dev/mapper/root
 ```
+
+From here, we can follow the normal AMD64 Install guide, noting from https://wiki.gentoo.org/wiki/Rootfs_encryption#Gentoo_installation
+
+> **Important**
+> 
+>* sys-fs/cryptsetup and sys-fs/btrfs-progs must be installed within the chroot, before the initramfs is created.
+>
+>   An initial RAM filesystem must be built with support for decrypting and mounting the root partition.
+>   If a bootloader is being used, it must be configured and installed on unencrypted volumes.
+
  
 ## Applying a filesystem
 
-For the root filesystem:
-
-```
-livecd /home/gentoo # lsblk
-NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
-loop0         7:0    0   3.6G  1 loop /run/rootfsbase
-sda           8:0    1  57.7G  0 disk 
-└─sda1        8:1    1  57.7G  0 part /run/initramfs/live
-nvme0n1     259:0    0 476.9G  0 disk 
-├─nvme0n1p1 259:1    0   499M  0 part 
-├─nvme0n1p2 259:2    0   128M  0 part 
-├─nvme0n1p3 259:3    0 100.5G  0 part 
-├─nvme0n1p4 259:4    0   4.8G  0 part 
-├─nvme0n1p5 259:5    0    16G  0 part 
-└─nvme0n1p6 259:6    0 355.1G  0 part 
-livecd /home/gentoo # mkfs.btrfs -f /dev/nvme0n1p6
-btrfs-progs v6.14
-See https://btrfs.readthedocs.io for more information.
-
-Performing full device TRIM /dev/nvme0n1p6 (355.09GiB) ...
-NOTE: several default settings have changed in version 5.15, please make sure
-      this does not affect your deployments:
-      - DUP for metadata (-m dup)
-      - enabled no-holes (-O no-holes)
-      - enabled free-space-tree (-R free-space-tree)
-
-Label:              (null)
-UUID:               f66f8882-459e-40f4-af87-f01b0c7c784b
-Node size:          16384
-Sector size:        4096        (CPU page size: 4096)
-Filesystem size:    355.09GiB
-Block group profiles:
-  Data:             single            8.00MiB
-  Metadata:         DUP               1.00GiB
-  System:           DUP               8.00MiB
-SSD detected:       yes
-Zoned device:       no
-Features:           extref, skinny-metadata, no-holes, free-space-tree
-Checksum:           crc32c
-Number of devices:  1
-Devices:
-   ID        SIZE  PATH          
-    1   355.09GiB  /dev/nvme0n1p6
-```
 For the swap partition:
 
 ```
@@ -196,7 +162,7 @@ livecd /home/gentoo # swapon /dev/nvme0n1p5
 
 ```
 livecd /home/gentoo # mkdir --parents /mnt/gentoo/
-livecd /home/gentoo # mount /dev/nvme0n1p6 /mnt/gentoo/
+livecd /home/gentoo # mount --label rootfs /mnt/gentoo/
 ```
 
 Mount the EFI partition too
@@ -492,6 +458,10 @@ USE="dist-kernel"
 Install the kernel sources:
 
 ```
+
+## References:
+
+
 emerge --ask sys-kernel/gentoo-sources
 ```
 
