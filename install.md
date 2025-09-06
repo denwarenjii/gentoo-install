@@ -146,6 +146,7 @@ From here, we can follow the normal AMD64 Install guide, noting from https://wik
 >   An initial RAM filesystem must be built with support for decrypting and mounting the root partition.
 >   If a bootloader is being used, it must be configured and installed on unencrypted volumes.
 
+We will get back to this later when we install dracut and rEFInd.
  
 ## Applying a filesystem
 
