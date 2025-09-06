@@ -295,11 +295,23 @@ I won't be configuring Gentoo to use binary packages by default.
 ```
 
 ```
+(chroot) livecd / # cpuid2cpuflags
+```
+
+```
+echo "*/* $(cpuid2cpuflags)" > /etc/portage/package.use/00cpu-flags
+```
+
+```
 (chroot) livecd / # cat /etc/portage/package.use/00cpu-flags 
 */* CPU_FLAGS_X86: aes avx avx2 bmi1 bmi2 f16c fma3 mmx mmxext pclmul popcnt rdrand sha sse sse2 sse3 sse4_1 sse4_2 sse4a ssse3 vpclmulqdq
 ```
 
 Configure `VIDEO_CARDS`
+
+```
+(chroot) livecd / # vim /etc/portage/package.use/00video-cards
+```
 
 ```
 (chroot) livecd / # cat /etc/portage/package.use/00video_cards 
@@ -336,7 +348,7 @@ Set the timezone
 Generate the locale
 
 ```
-(chroot) livecd / # cat /etc/locale.gen 
+(chroot) livecd / # vim /etc/locale.gen 
 # /etc/locale.gen: list all of the locales you want to have on your system.
 # See the locale.gen(5) man page for more details.
 #
