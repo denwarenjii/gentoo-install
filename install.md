@@ -465,3 +465,21 @@ sys-kernel/installkernel efistub dracut
 
 I will not be using a UKI (Unified Kernel Image).
 
+Install the distribution kernel
+
+```
+emerge --ask sys-kernel/gentoo-kernel
+```
+
+Add the global `USE` flag to `/etc/portage/make.conf`:
+
+```
+USE="dist-kernel"
+```
+
+Install the kernel sources:
+
+```
+emerge --ask sys-kernel/gentoo-sources
+```
+
