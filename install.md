@@ -125,6 +125,18 @@ Syncing disks.
 livecd /home/gentoo/install #
 ```
 
+Make sure to change the Type-UUIDs to conform to DPS (Discoverable Partition Specification)!
+
+## Luks
+
+```
+livecd /home/gentoo # cryptsetup -v luksFormat /dev/nvme0n1p6
+```
+
+```
+livecd /home/gentoo # mkfs.btrfs -L rootfs /dev/mapper/root
+```
+ 
 ## Applying a filesystem
 
 For the root filesystem:
