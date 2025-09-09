@@ -786,6 +786,27 @@ Creating //boot/refind_linux.conf; edit it to adjust kernel options.
 Installation has completed successfully.
 
 ```
+
+And now 
+
+```
+exit
+```
+
+```
+cd
+umount -l /mnt/gentoo/dev{/shm,/pts,}
+umount -R /mnt/gentoo
+reboot
+```
+
+Right after rebooting, I was met with a white screen with the refind logo, so I went into the UEFI and tried 
+booting the kernel directly. After entering the password, the kenrel hung, and after waiting, dracut tried
+scanning for btrfs devices but couldn't find one. I tried again, this time entering a wrong password, and got
+an error for "no luks device with that passphrase" (to paraphrase), which implies that luksOpen works, but maybe
+the mapped device name is wrong or my initramfs doesn't have `btrfs` support.
+
+
 ## References:
 
 
