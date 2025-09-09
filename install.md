@@ -137,6 +137,30 @@ livecd /home/gentoo # cryptsetup -v luksFormat /dev/nvme0n1p6
 livecd /home/gentoo # mkfs.btrfs -L rootfs /dev/mapper/root
 ```
 
+Now test opening it:
+
+```
+livecd /home/gentoo # cryptsetup luksOpen /dev/nvme0n1p6 root
+Enter passphrase for /dev/nvme0n1p6: 
+```
+
+```
+livecd /home/gentoo # lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+loop0         7:0    0   3.6G  1 loop  /run/rootfsbase
+sda           8:0    1  57.7G  0 disk  
+└─sda1        8:1    1  57.7G  0 part  /run/initramfs/live
+nvme0n1     259:0    0 476.9G  0 disk  
+├─nvme0n1p1 259:1    0   499M  0 part  
+├─nvme0n1p2 259:2    0   128M  0 part  
+├─nvme0n1p3 259:3    0 100.5G  0 part  
+├─nvme0n1p4 259:4    0   4.8G  0 part  
+├─nvme0n1p5 259:5    0    16G  0 part  
+└─nvme0n1p6 259:6    0 355.1G  0 part  
+  └─root    253:0    0 355.1G  0 crypt 
+```
+
+
 From here, we can follow the normal AMD64 Install guide, noting from https://wiki.gentoo.org/wiki/Rootfs_encryption#Gentoo_installation
 
 > **Important**
