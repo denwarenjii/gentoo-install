@@ -574,6 +574,19 @@ USE="dist-kernel"
 Install the kernel sources:
 
 ```
+emerge --ask sys-kernel/gentoo-sources
+```
+
+Now symlink the kernel sources to `/usr/src/linux` with `eselect`:
+
+```
+(chroot) livecd / # eselect kernel list
+Available kernel symlink targets:
+  [1]   linux-6.12.41-gentoo
+(chroot) livecd / # eselect kernel set 1
+(chroot) livecd / # ls -l /usr/src/linux
+lrwxrwxrwx 1 root root 20 Sep  8 13:29 /usr/src/linux -> linux-6.12.41-gentoo
+```
 
 ## References:
 
