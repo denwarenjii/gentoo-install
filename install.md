@@ -509,6 +509,18 @@ Now before doing this, we go back to the warning from before and install
 (chroot) livecd / # emerge -avt sys-fs/cryptsetup sys-fs/btrfs-progs
 ```
 
+Configure dracut
+
+```
+(chroot) livecd / # mkdir /etc/dracut.conf.d
+```
+
+```
+(chroot) livecd / # vim /etc/dracut.conf.d/luks.conf
+```
+
+
+
 Install the distribution kernel
 
 ```
