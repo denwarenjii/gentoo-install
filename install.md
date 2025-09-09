@@ -144,6 +144,22 @@ livecd /home/gentoo # cryptsetup luksOpen /dev/nvme0n1p6 root
 Enter passphrase for /dev/nvme0n1p6: 
 ```
 
+```
+livecd /home/gentoo # lsblk
+NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
+loop0         7:0    0   3.6G  1 loop  /run/rootfsbase
+sda           8:0    1  57.7G  0 disk  
+└─sda1        8:1    1  57.7G  0 part  /run/initramfs/live
+nvme0n1     259:0    0 476.9G  0 disk  
+├─nvme0n1p1 259:1    0   499M  0 part  
+├─nvme0n1p2 259:2    0   128M  0 part  
+├─nvme0n1p3 259:3    0 100.5G  0 part  
+├─nvme0n1p4 259:4    0   4.8G  0 part  
+├─nvme0n1p5 259:5    0    16G  0 part  
+└─nvme0n1p6 259:6    0 355.1G  0 part  
+  └─root    253:0    0 355.1G  0 crypt 
+```
+
 And mounting it:
 
 ```
@@ -163,7 +179,7 @@ nvme0n1     259:0    0 476.9G  0 disk
 ├─nvme0n1p4 259:4    0   4.8G  0 part  
 ├─nvme0n1p5 259:5    0    16G  0 part  
 └─nvme0n1p6 259:6    0 355.1G  0 part  
-  └─root    253:0    0 355.1G  0 crypt 
+  └─root    253:0    0 355.1G  0 crypt /mnt/gentoo
 ```
 
 
@@ -485,6 +501,13 @@ sys-kernel/installkernel efistub dracut
 ```
 
 I will not be using a UKI (Unified Kernel Image).
+
+Now before doing this, we go back to the warning from before and install
+`sys-fs/cryptsetup` and `sys-fs/btrfs-progs`
+
+```
+(chroot) livecd / # emerge -avt sys-fs/cryptsetup sys-fs/btrfs-progs
+```
 
 Install the distribution kernel
 
