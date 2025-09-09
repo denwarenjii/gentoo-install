@@ -602,6 +602,43 @@ ID 257 gen 516 top level 5 path @home
 /dev/nvme0n1p2: PARTLABEL="Micr" PARTUUID="e1778793-8291-4804-81a1-d83411145c65"
 ```
 
+```
+# /etc/fstab: static file system information.
+#
+# See the manpage fstab(5) for more information.
+#
+# NOTE: The root filesystem should have a pass number of either 0 or 1.
+#       All other filesystems should have a pass number of 0 or greater than 1.
+#
+# NOTE: Even though we list ext4 as the type here, it will work with ext2/ext3
+#       filesystems.  This just tells the kernel to use the ext4 driver.
+#
+# NOTE: You can use full paths to devices like /dev/sda3, but it is often
+#       more reliable to use filesystem labels or UUIDs. See your filesystem
+#       documentation for details on setting a label. To obtain the UUID, use
+#       the blkid(8) command.
+
+# <fs> = filesystem identifier (UUID, PARTUUID, path to device file, label)
+# <mountpoint> = where to mount
+# <type> = type of file system
+# <opts> = options to pass to mount
+# <dump> = used by dump to check if partition needs to be dumped or not 
+#          (typically 0)
+# <pass> = used by fsck to determine the order in which filesystems should be 
+#          checked if the system wasn't shut down properly. The root 
+#          filesystem should have this set to 1 while the rest should have 2 
+#          (or 0 if a filesystem check is not necessary).
+
+# <fs>                  <mountpoint>    <type>          <opts>                 <dump> <pass>
+UUID=1661-3176          /efi            vfat            umask=0077             0       2
+UUID=727d6157-6da4-49f1-b501-94c9763747e9  /     btrfs  defaults,subvol=/@     0       1
+UUID=727d6157-6da4-49f1-b501-94c9763747e9  /home btrfs  defaults,subvol=/@home 0       2
+```
+
+```
+(chroot) livecd / # echo hp845 > /etc/hostname
+```
+
 
 
 ## References:
