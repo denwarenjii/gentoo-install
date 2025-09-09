@@ -641,6 +641,7 @@ UUID=727d6157-6da4-49f1-b501-94c9763747e9  /home btrfs  defaults,subvol=/@home 0
 
 ```
 (chroot) livecd / # rc-update add dhcpcd default
+(chroot) livecd / # rc-service dhcpcd start
 ```
 
 Add an alias in `/etc/hosts`
@@ -685,6 +686,14 @@ Add an alias in `/etc/hosts`
 #
 ```
 
+
+```
+(chroot) livecd / # passwd 
+```
+
+```
+(chroot) livecd / # emerge -avt app-admin/sysklogd
+```
 
 
 
