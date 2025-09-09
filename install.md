@@ -573,10 +573,37 @@ USE="dist-kernel"
 
 # Configuring the system 
 
+I forgot to make btrfs subvolumes when I created the filesytem, so I will do it now.
+
+
+```
+(chroot) livecd / # btrfs subvolume create @
+Create subvolume './@'
+(chroot) livecd / # btrfs subvolume create @home
+Create subvolume './@home'
+```
+
+```
+(chroot) livecd / # btrfs subvolume list /
+ID 256 gen 516 top level 5 path @
+ID 257 gen 516 top level 5 path @home
+```
+
+```
+(chroot) livecd / # blkid
+/dev/sda1: LABEL="GENTOO-AMD6" UUID="1D19-2B06" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="Main Data Partition" PARTUUID="9efb1ded-5604-48b3-9d4d-6cdd6891fbb3"
+/dev/nvme0n1p5: UUID="31e55f72-4af4-4afa-a565-3eb599d3e6da" TYPE="swap" PARTUUID="0657fd6d-a4ab-43c4-84e5-0933c84b4f4f"
+/dev/nvme0n1p3: LABEL="Windows" BLOCK_SIZE="512" UUID="943A61B43A619450" TYPE="ntfs" PARTLABEL="Basi" PARTUUID="f6ebb88d-cc6b-4153-941b-efa339816721"
+/dev/nvme0n1p1: LABEL="BOOT" UUID="1661-3176" BLOCK_SIZE="512" TYPE="vfat" PARTLABEL="EFI" PARTUUID="56f1a617-2412-4ffc-990e-61419f169127"
+/dev/nvme0n1p6: UUID="727d6157-6da4-49f1-b501-94c9763747e9" TYPE="crypto_LUKS" PARTUUID="34015f40-00e6-4450-9b57-490dc5fc8d84"
+/dev/nvme0n1p4: LABEL="Recovery" BLOCK_SIZE="512" UUID="F41C62161C61D3E0" TYPE="ntfs" PARTUUID="0a17139e-9f46-4665-a2a1-f47219e5b2a6"
+/dev/loop0: BLOCK_SIZE="131072" TYPE="squashfs"
+/dev/mapper/root: LABEL="rootfs" UUID="7442ba3f-d6f4-4aaf-b2a3-35b9d5167aaa" UUID_SUB="742f9fd3-15b4-42c8-bce4-1eef7c78e5c4" BLOCK_SIZE="4096" TYPE="btrfs"
+/dev/nvme0n1p2: PARTLABEL="Micr" PARTUUID="e1778793-8291-4804-81a1-d83411145c65"
+```
+
+
 
 ## References:
 
-
-emerge --ask sys-kernel/gentoo-sources
-```
 
