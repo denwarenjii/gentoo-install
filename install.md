@@ -519,7 +519,45 @@ Configure dracut
 (chroot) livecd / # vim /etc/dracut.conf.d/luks.conf
 ```
 
+In `/etc/dracut.conf.d/luks.conf`:
 
+```
+add_dracutmodules+=" crypt "
+```
+
+Now get the UUID of the luks volume and the root partition
+and add them to `/etc/dracut.conf.d/luks.conf`:
+
+```
+(chroot) livecd / # lsblk -o name,uuid
+NAME        UUID
+loop0       
+sda         
+└─sda1      1D19-2B06
+nvme0n1     
+├─nvme0n1p1 1661-3176
+├─nvme0n1p2 
+├─nvme0n1p3 943A61B43A619450
+├─nvme0n1p4 F41C62161C61D3E0
+├─nvme0n1p5 31e55f72-4af4-4afa-a565-3eb599d3e6da
+└─nvme0n1p6 727d6157-6da4-49f1-b501-94c9763747e9
+  └─root    7442ba3f-d6f4-4aaf-b2a3-35b9d5167aaa
+```
+
+In `/etc/dracut.conf.d/luks.conf`, add
+
+```
+kernel_cmdline+=" root=UUID=7442ba3f-d6f4-4aaf-b2a3-35b9d5167aaa rd.luks.uuid=727d6157-6da4-49f1-b501-94c9763747e9 "
+```
+
+In total we have
+
+`/etc/dracut.conf.d/luks.conf`
+
+```
+add_dracutmodules+=" crypt "
+kernel_cmdline+=" root=UUID=7442ba3f-d6f4-4aaf-b2a3-35b9d5167aaa rd.luks.uuid=727d6157-6da4-49f1-b501-94c9763747e9 "
+```
 
 Install the distribution kernel
 
