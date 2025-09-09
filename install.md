@@ -737,7 +737,55 @@ emerge --ask sys-block/io-scheduler-udev-rules
 emerge --ask net-wireless/iw net-wireless/wpa_supplicant
 ```
 
+In `/etc/portage/package.use/refind`:
 
+```
+sys-boot/refind btrfs doc
+```
+
+then
+
+```
+(chroot) livecd / # emerge -avt sys-boot/refind
+```
+
+```
+emerge --ask --config sys-kernel/gentoo-kernel
+```
+
+```
+efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo" --loader "vmlinuz-6.12.41-gentoo-dist" --unicode "initrd=initramfs-6.12.41-gentoo-dist"
+```
+
+```
+(chroot) livecd / # efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo" --loader "vmlinuz-6.12.41-gentoo-dist" --unicode "initrd=initramfs-6.12.41-gentoo-dist"
+BootCurrent: 0003
+Timeout: 5 seconds
+BootOrder: 0000,01FF,0200,0003,0002,0001,0004
+Boot0001  USB NETWORK BOOT:     PciRoot(0x0)/Pci(0x8,0x1)/Pci(0x0,0x4)/USB(0,0)/USB(0,6)/MAC(0c3796385d61,0)/IPv4(0.0.0.0,0,DHCP,0.0.0.0,0.0.0.0,0.0.0.0)걎脈鼑䵙຅᫢ⱒ뉙⠛
+Boot0002* Windows Boot Manager  HD(1,GPT,56f1a617-2412-4ffc-990e-61419f169127,0x800,0xf9800)/\EFI\Microsoft\Boot\bootmgfw.efi䥗䑎坏S
+Boot0003* 07002732C2D5E232      PciRoot(0x0)/Pci(0x8,0x1)/Pci(0x0,0x3)/USB(5,0)걎脈鼑䵙຅᫢ⱒ뉙᠉
+Boot0004  USB NETWORK BOOT:     PciRoot(0x0)/Pci(0x8,0x1)/Pci(0x0,0x4)/USB(0,0)/USB(0,6)/MAC(0c3796385d61,0)/IPv6([::],0,Static,[::],[::],64)걎脈鼑䵙຅᫢ⱒ뉙〛
+Boot01FF* UMC 1 Gentoo Linux 6.12.41    HD(1,GPT,56f1a617-2412-4ffc-990e-61419f169127,0x800,0xf9800)/\EFI\Gentoo\vmlinuz-6.12.41-gentoo-dist.efi  initrd=\EFI\Gentoo\amd-uc.img initrd=\EFI\Gentoo\initramfs-6.12.41-gentoo-dist.img
+Boot0200* UMC 2 Gentoo Linux 6.12.41    HD(1,GPT,56f1a617-2412-4ffc-990e-61419f169127,0x800,0xf9800)/\EFI\Gentoo\vmlinuz-6.12.41-gentoo-dist-old.efi  initrd=\EFI\Gentoo\amd-uc.img initrd=\EFI\Gentoo\initramfs-6.12.41-gentoo-dist.img.old
+Boot0000* Gentoo        HD(1,GPT,56f1a617-2412-4ffc-990e-61419f169127,0x800,0xf9800)/vmlinuz-6.12.41-gentoo-distinitrd=initramfs-6.12.41-gentoo-dist
+(chroot) livecd / # refind-install
+ShimSource is none
+Installing rEFInd on Linux....
+ESP was found at /efi using vfat
+Installing driver for btrfs (btrfs_x64.efi)
+Copied rEFInd binary files
+
+Copying sample configuration file as refind.conf; edit this file to configure
+rEFInd.
+
+Creating new NVRAM entry
+rEFInd is set as the default boot manager.
+Creating //boot/refind_linux.conf; edit it to adjust kernel options.
+
+Installation has completed successfully.
+
+```
 ## References:
 
 
