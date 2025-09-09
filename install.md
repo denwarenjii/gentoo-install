@@ -695,6 +695,47 @@ Add an alias in `/etc/hosts`
 (chroot) livecd / # emerge -avt app-admin/sysklogd
 ```
 
+```
+(chroot) livecd / # rc-update add sysklogd default
+ * service sysklogd added to runlevel default
+```
+
+```
+(chroot) livecd / # emerge --ask sys-process/cronie
+```
+
+```
+(chroot) livecd / # rc-update add cronie default
+ * service cronie added to runlevel default
+```
+
+```
+emerge --ask sys-apps/mlocate
+```
+
+```
+rc-update add sshd default
+```
+
+```
+emerge --ask app-shells/bash-completion
+```
+
+```
+emerge --ask net-misc/chrony
+```
+
+```
+rc-update add chronyd default
+```
+
+```
+emerge --ask sys-block/io-scheduler-udev-rules
+```
+
+```
+emerge --ask net-wireless/iw net-wireless/wpa_supplicant
+```
 
 
 ## References:
