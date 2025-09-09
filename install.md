@@ -144,6 +144,12 @@ livecd /home/gentoo # cryptsetup luksOpen /dev/nvme0n1p6 root
 Enter passphrase for /dev/nvme0n1p6: 
 ```
 
+And mounting it:
+
+```
+livecd /home/gentoo # mount --label rootfs /mnt/gentoo/
+```
+
 ```
 livecd /home/gentoo # lsblk
 NAME        MAJ:MIN RM   SIZE RO TYPE  MOUNTPOINTS
