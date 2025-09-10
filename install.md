@@ -806,6 +806,14 @@ scanning for btrfs devices but couldn't find one. I tried again, this time enter
 an error for "no luks device with that passphrase" (to paraphrase), which implies that luksOpen works, but maybe
 the mapped device name is wrong or my initramfs doesn't have `btrfs` support.
 
+I tried:
+
+```
+livecd / # dracut initramfs-6.12.41-gentoo-dist.img 6.12.41-gentoo-dist
+```
+
+and then manually move it `/efi/EFI/Gentoo`
+
 
 ## References:
 
