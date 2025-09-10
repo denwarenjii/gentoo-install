@@ -814,6 +814,11 @@ livecd / # dracut initramfs-6.12.41-gentoo-dist.img 6.12.41-gentoo-dist
 
 and then manually move it `/efi/EFI/Gentoo`
 
+then
+
+```
+efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo" --loader "vmlinuz-6.12.41-gentoo-dist" --unicode "initrd=initramfs-6.12.41-gentoo-dist"
+```
 
 ## References:
 
