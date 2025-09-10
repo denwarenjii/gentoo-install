@@ -827,11 +827,16 @@ to the ESP, so I need to prefix both the loeader and initramfs with `\EFI\Gentoo
 [Thanks Arch Wiki](https://wiki.archlinux.org/title/EFI_boot_stub#Booting_an_EFI_boot_stub).
 
 ```
-efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo Linux "\EFI\Gentoo\vmlinuz-6.12.41-gentoo-dist" --unicode " initrd=\EFI\Gentoo\initramfs-6.12.41-gentoo-dist"
+efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo Linux" --loader "\EFI\Gentoo\vmlinuz-6.12.41-gentoo-dist" --unicode " initrd=\EFI\Gentoo\initramfs-6.12.41-gentoo-dist"
 ```
 
 After this, I could see a Gentoo entry in the UEFI, and after disabling all other boot options, I got a boot device not
 found error. Oops! I had typed `|` instead of `\` for one of the paths. 
+
+Now, when I booted, I could confirm that the device was found and it was using the initramfs, but it hung for a few minutes before
+dracut showed "Scanning for all btrfs devices". I had gotten this error on a failed install before, so I knew that it would
+eventually drop me to dracut shell where I could debug this further.
+
 
 ## References:
 
