@@ -823,10 +823,15 @@ efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo" --loader "vmlinuz-6.12.
 Okay, this got me no where, and after rebooting a few times, I realized that my laptop's UEFI was deleting the EFI
 entry. After some reading, I was pretty sure that this is because the UEFI implementation cannot find the
 lodaer (the .efi file), so it just deletes the entry. Sure enough, I was putting the path in wrong. Entries are *relatiive*
-to the ESP, so I need to prefix both the loeader and initramfs with \EFI\Gentoo (note the backslashes). 
+to the ESP, so I need to prefix both the loeader and initramfs with `\EFI\Gentoo` (note the backslashes). 
 [Thanks Arch Wiki](https://wiki.archlinux.org/title/EFI_boot_stub#Booting_an_EFI_boot_stub).
 
+```
+efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo Linux "\EFI\Gentoo\vmlinuz-6.12.41-gentoo-dist" --unicode " initrd=\EFI\Gentoo\initramfs-6.12.41-gentoo-dist"
+```
 
+After this, I could see a Gentoo entry in the UEFI, and after disabling all other boot options, I got a boot device not
+found error.
 
 ## References:
 
