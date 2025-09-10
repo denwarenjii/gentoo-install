@@ -831,7 +831,7 @@ efibootmgr --create --disk /dev/nvme0n1 --label "Gentoo Linux "\EFI\Gentoo\vmlin
 ```
 
 After this, I could see a Gentoo entry in the UEFI, and after disabling all other boot options, I got a boot device not
-found error.
+found error. Oops! I had typed `|` instead of `\` for one of the paths. 
 
 ## References:
 
