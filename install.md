@@ -334,7 +334,13 @@ priority = 1
 sync-uri = http://gentoo-mirror.flux.utah.edu/releases/amd64/binpackages/23.0/x86-64-v3/
 ```
 
-I won't be configuring Gentoo to use binary packages by default.
+I won't be configuring Gentoo to use binary packages by default. But I might install some large packages this way like Firefox.
+
+Run `getuto` to set up the keyrings for verification.
+
+```
+getuto
+```
 
 ```
 (chroot) livecd / # emerge --ask --oneshot app-portage/cpuid2cpuflags
@@ -945,6 +951,13 @@ Copy the default sway config to `~/.config/sway/config`
 In that file, I changed the mod key to Alt.
 
 Mod+Shift+C to reload the config.
+
+Update the whole system:
+
+```
+```
+
+## Sound:
 
 
 ## References:
