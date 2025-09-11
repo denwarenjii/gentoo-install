@@ -892,6 +892,64 @@ useradd -m -G users,wheel,audio -s /bin/bash chris
 passwd chris
 ```
 
+# Getting a GUI
+
+`/etc/portage/package.use/sway`:
+
+```
+gui-wm/sway man swaybar swaynag X tray wallpapers
+```
+
+```
+emerge --avt sway foot swaylock swayidle wmenu
+```
+
+```
+emerge -avt elogind
+```
+
+```
+rc-service elogind start
+rc-update add elogind boot
+```
+
+Logout from root with Ctrl+D and login as your normal user.
+
+```
+emerge -avt sudo
+```
+
+Add yourself to the sudoers:
+
+```
+su
+```
+
+```
+visudo
+```
+
+add `chris  ALL=(ALL:ALL) ALL` to the file and save it.
+
+
+Now start sway
+
+```
+sway
+```
+
+The default mod key is Win or Super. You can start a terminal with Win+Enter
+
+```
+```
+
+
 ## References:
 
+## TODO:
+
+- Update rootfs encryption article to specifcy that entries are relative to ESP.
+- Ask about why /usr/share/portage/config/make.conf.example shows options like
+  --ask --verbose but not --jobs (maybe expand the article?
+   https://wiki.gentoo.org/wiki/EMERGE_DEFAULT_OPTS
 
