@@ -22,3 +22,4 @@ seat seat0 xcursor_theme Adwaita 20
 
 to make the cursor size 20 (pixels?).
 
+The foot terminal uses the monospace font by default, which might map to something else 
