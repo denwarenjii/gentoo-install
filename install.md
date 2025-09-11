@@ -631,8 +631,8 @@ ID 257 gen 516 top level 5 path @home
 
 # <fs>                  <mountpoint>    <type>          <opts>                 <dump> <pass>
 UUID=1661-3176          /efi            vfat            umask=0077             0       2
-UUID=727d6157-6da4-49f1-b501-94c9763747e9  /     btrfs  defaults,subvol=/@     0       1
-UUID=727d6157-6da4-49f1-b501-94c9763747e9  /home btrfs  defaults,subvol=/@home 0       2
+UUID=TODO  /     btrfs  defaults,subvol=/@     0       1
+UUID=TODO  /home btrfs  defaults,subvol=/@home 0       2
 ```
 
 ```
@@ -862,7 +862,35 @@ wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
 > quit
 ```
 
+Now make sure `wpa_supplicant` is added to startup:
 
+```
+rc-update add wpa_supplicant default
+```
+
+I want to download brightnessctl, so I will enable GURU:
+
+```
+emerge -avt app-eselect/eselect-repository
+```
+
+then
+
+```
+eselect repository enable guru
+```
+
+```
+emerge --sync guru
+```
+
+```
+useradd -m -G users,wheel,audio -s /bin/bash chris
+```
+
+```
+passwd chris
+```
 
 ## References:
 
