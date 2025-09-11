@@ -837,6 +837,32 @@ Now, when I booted, I could confirm that the device was found and it was using t
 dracut showed "Scanning for all btrfs devices". I had gotten this error on a failed install before, so I knew that it would
 eventually drop me to dracut shell where I could debug this further.
 
+Success! Now we are booted.
+
+Now I need to connect to a network again.
+
+Edit `/etc/wpa_supplicant/wpa_supplicant.conf`
+
+```
+ctrl_interface=/run/wpa_supplicant
+update_config=1
+```
+
+This will allow use to use `wpa_cli` to connect to a network.
+
+```
+wpa_supplicant -B -i wlp1s0 -c /etc/wpa_supplicant/wpa_supplicant.conf
+> scan
+> scan_results
+> add_network
+> set_network 0 ssid "SSID"
+> set_network 0
+> enable_network 0
+> save_config
+> quit
+```
+
+
 
 ## References:
 
