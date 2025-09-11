@@ -940,8 +940,11 @@ sway
 
 The default mod key is Win or Super. You can start a terminal with Win+Enter
 
-```
-```
+Copy the default sway config to `~/.config/sway/config`
+
+In that file, I changed the mod key to Alt.
+
+Mod+Shift+C to reload the config.
 
 
 ## References:
@@ -949,7 +952,10 @@ The default mod key is Win or Super. You can start a terminal with Win+Enter
 ## TODO:
 
 - Update rootfs encryption article to specifcy that entries are relative to ESP.
+
 - Ask about why /usr/share/portage/config/make.conf.example shows options like
   --ask --verbose but not --jobs (maybe expand the article?
    https://wiki.gentoo.org/wiki/EMERGE_DEFAULT_OPTS
 
+- Add nodejs as a bin package. It takes way too long to compile. See https://forums.gentoo.org/viewtopic-p-8848797.html?sid=248e70926183584c7449df514011bf58
+ 
