@@ -133,15 +133,15 @@ Make sure to change the Type-UUIDs to conform to DPS (Discoverable Partition Spe
 livecd /home/gentoo # cryptsetup -v luksFormat /dev/nvme0n1p6
 ```
 
-```
-livecd /home/gentoo # mkfs.btrfs -L rootfs /dev/mapper/root
-```
-
 Now test opening it:
 
 ```
 livecd /home/gentoo # cryptsetup luksOpen /dev/nvme0n1p6 root
 Enter passphrase for /dev/nvme0n1p6: 
+```
+
+```
+livecd /home/gentoo # mkfs.btrfs -L rootfs /dev/mapper/root
 ```
 
 ```
